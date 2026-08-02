@@ -1,0 +1,144 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Link, useNavigate } from 'react-router-dom';
+import { Bus, Mail, Lock, User, Phone, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import axios from 'axios';
+import { useAppDispatch } from '../hooks/redux';
+import { setCredentials } from '../store/slices/authSlice';
+import toast from 'react-hot-toast';
+
+const registerSchema = z.object({
+  name: z.string().min(2, 'Name is too short'),
+  email: z.string().email('Invalid email address'),
+  phone: z.string().min(10, 'Invalid phone number'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+  role: z.enum(['CUSTOMER', 'COMPANY']).default('CUSTOMER'),
+});
+
+type RegisterForm = z.infer<typeof registerSchema>;
+
+const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const { register, handleSubmit, formState: { errors } } = useForm<RegisterForm>({
+    resolver: zodResolver(registerSchema),
+  });
+
+  const onSubmit = async (data: RegisterForm) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post('/api/v1/auth/register', data);
+      dispatch(setCredentials({ user: response.data, token: response.data.token }));
+      toast.success('Account created successfully!');
+      navigate('/');
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Registration failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="w-full max-w-xl bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100"
+      >
+        <div className="flex flex-col items-center mb-8">
+          <div className="p-3 text-white rounded-2xl bg-purple-gradient mb-4">
+            <Bus size={32} />
+          </div>
+          <h2 className="text-3xl font-bold text-slate-900">Create Account</h2>
+          <p className="text-slate-500 mt-2">Join thousands of travelers today</p>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="text-sm font-semibold text-slate-700 ml-1">Full Name</label>
+            <div className="relative">
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                {...register('name')}
+                placeholder="John Doe"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+              />
+            </div>
+            {errors.name && <p className="text-xs text-red-500 ml-1">{errors.name.message}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-semibold text-slate-700 ml-1">Email Address</label>
+            <div className="relative">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                {...register('email')}
+                type="email"
+                placeholder="name@example.com"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+              />
+            </div>
+            {errors.email && <p className="text-xs text-red-500 ml-1">{errors.email.message}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-semibold text-slate-700 ml-1">Phone Number</label>
+            <div className="relative">
+              <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                {...register('phone')}
+                placeholder="98XXXXXXXX"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+              />
+            </div>
+            {errors.phone && <p className="text-xs text-red-500 ml-1">{errors.phone.message}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-semibold text-slate-700 ml-1">Password</label>
+            <div className="relative">
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                {...register('password')}
+                type="password"
+                placeholder="••••••••"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+              />
+            </div>
+            {errors.password && <p className="text-xs text-red-500 ml-1">{errors.password.message}</p>}
+          </div>
+
+          <div className="md:col-span-2 space-y-2">
+            <label className="text-sm font-semibold text-slate-700 ml-1">Register As</label>
+            <select
+              {...register('role')}
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+            >
+              <option value="CUSTOMER">Customer (I want to book tickets)</option>
+              <option value="COMPANY">Company (I want to manage buses)</option>
+            </select>
+          </div>
+
+          <button
+            disabled={isLoading}
+            className="md:col-span-2 w-full py-4 bg-purple-gradient text-white font-bold rounded-2xl shadow-lg shadow-purple-200 hover:opacity-90 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+          >
+            {isLoading ? <Loader2 className="animate-spin" size={20} /> : <span>Create Account</span>}
+          </button>
+        </form>
+
+        <p className="mt-8 text-center text-slate-600 text-sm">
+          Already have an account? {' '}
+          <Link to="/login" className="text-purple-600 font-bold hover:underline">Sign In</Link>
+        </p>
+      </motion.div>
+    </div>
+  );
+};
+
+export default Register;

@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900;
+  }
+}
+
+.bg-purple-gradient {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
