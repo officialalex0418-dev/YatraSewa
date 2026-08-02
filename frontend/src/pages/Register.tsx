@@ -5,7 +5,7 @@ import * as z from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { Bus, Mail, Lock, User, Phone, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import api from '../services/api';
 import { useAppDispatch } from '../hooks/redux';
 import { setCredentials } from '../store/slices/authSlice';
 import toast from 'react-hot-toast';
@@ -32,7 +32,7 @@ const Register = () => {
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('/api/v1/auth/register', data);
+      const response = await api.post('/auth/register', data);
       dispatch(setCredentials({ user: response.data, token: response.data.token }));
       toast.success('Account created successfully!');
       navigate('/');

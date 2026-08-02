@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import api from '../services/api';
 import { useSearchParams } from 'react-router-dom';
 import { Bus, Filter, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -13,7 +13,7 @@ const Search = () => {
   const { data: trips, isLoading } = useQuery({
     queryKey: ['trips', from, to, date],
     queryFn: async () => {
-      const response = await axios.get(`/api/v1/trips`, {
+      const response = await api.get(`/trips`, {
         params: { from, to, date },
       });
       return response.data;
