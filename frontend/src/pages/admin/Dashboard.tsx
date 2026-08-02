@@ -1,11 +1,9 @@
 import DashboardLayout from '../../layouts/DashboardLayout';
-import { motion } from 'framer-motion';
 import {
   Users,
   Bus,
   DollarSign,
   ShieldCheck,
-  ArrowUpRight,
   Briefcase,
   Ticket,
   TrendingUp,
