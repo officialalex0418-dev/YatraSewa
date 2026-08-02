@@ -1,4 +1,3 @@
-import React from 'react';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { motion } from 'framer-motion';
 import { Users, Bus, DollarSign, ShieldCheck, ArrowUpRight, Clock, AlertCircle } from 'lucide-react';

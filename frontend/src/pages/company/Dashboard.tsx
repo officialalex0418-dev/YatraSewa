@@ -1,11 +1,10 @@
-import React from 'react';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAppSelector } from '../../hooks/redux';
 import { TrendingUp, Users, Bus, Calendar, DollarSign, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
   { name: 'Mon', revenue: 4000 },
@@ -20,7 +19,7 @@ const data = [
 const CompanyDashboard = () => {
   const { user } = useAppSelector(state => state.auth);
 
-  const { data: stats, isLoading } = useQuery({
+  const { data: stats } = useQuery({
     queryKey: ['companyStats', user?._id],
     queryFn: async () => {
       const response = await axios.get(`/api/v1/company/stats/${user?._id}`);

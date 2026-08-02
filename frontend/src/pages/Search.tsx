@@ -1,8 +1,7 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
-import { Bus, Clock, MapPin, Users, Filter, ChevronRight } from 'lucide-react';
+import { Bus, Filter, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Search = () => {

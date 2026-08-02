@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppSelector } from '../../hooks/redux';
 import { Ticket, Wallet, Star, Clock, Gift, Settings, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
