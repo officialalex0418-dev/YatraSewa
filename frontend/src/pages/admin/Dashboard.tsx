@@ -1,91 +1,189 @@
+import React from 'react';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { motion } from 'framer-motion';
-import { Users, Bus, DollarSign, ShieldCheck, ArrowUpRight, Clock, AlertCircle } from 'lucide-react';
+import {
+  Users,
+  Bus,
+  DollarSign,
+  ShieldCheck,
+  ArrowUpRight,
+  Clock,
+  AlertCircle,
+  Briefcase,
+  Ticket,
+  TrendingUp,
+  CreditCard,
+  Percent,
+  LifeBuoy
+} from 'lucide-react';
+import { StatCard } from '../../components/ui/StatCard';
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar
+} from 'recharts';
+
+const data = [
+  { name: 'Mon', revenue: 4000, bookings: 240 },
+  { name: 'Tue', revenue: 3000, bookings: 139 },
+  { name: 'Wed', revenue: 2000, bookings: 980 },
+  { name: 'Thu', revenue: 2780, bookings: 390 },
+  { name: 'Fri', revenue: 1890, bookings: 480 },
+  { name: 'Sat', revenue: 2390, bookings: 380 },
+  { name: 'Sun', revenue: 3490, bookings: 430 },
+];
 
 const AdminDashboard = () => {
   return (
     <DashboardLayout role="SUPER_ADMIN">
-      <div className="space-y-10">
+      <div className="space-y-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-black text-slate-900">Platform Control Center</h1>
-            <p className="text-slate-500 mt-1">Global monitoring of YatraSewa ecosystem.</p>
+            <h1 className="text-4xl font-black text-slate-900 tracking-tight">Platform Overview</h1>
+            <p className="text-slate-500 mt-2 text-lg">Real-time health and performance metrics.</p>
           </div>
-          <div className="flex items-center space-x-3">
-            <button className="px-6 py-2.5 bg-slate-900 text-white font-bold rounded-xl shadow-lg hover:bg-slate-800 transition-colors">
+          <div className="flex items-center space-x-4">
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200" />
+              ))}
+              <div className="w-10 h-10 rounded-full border-2 border-white bg-purple-600 flex items-center justify-center text-[10px] font-bold text-white">+12</div>
+            </div>
+            <button className="px-8 py-3 bg-slate-900 text-white font-bold rounded-2xl shadow-xl hover:bg-slate-800 transition-all hover:scale-[1.02]">
               System Health
             </button>
           </div>
         </div>
 
-        {/* Global Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <GlobalStatCard label="Total Revenue" value="NPR 2.4M" trend="+24%" icon={<DollarSign size={24} />} color="bg-purple-600" />
-          <GlobalStatCard label="Active Companies" value="124" trend="+8" icon={<Bus size={24} />} color="bg-blue-600" />
-          <GlobalStatCard label="Total Users" value="12,504" trend="+1.2k" icon={<Users size={24} />} color="bg-emerald-600" />
-          <GlobalStatCard label="Pending Approvals" value="12" icon={<ShieldCheck size={24} />} color="bg-amber-600" />
+        {/* Global Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StatCard label="Total Revenue" value="NPR 2.4M" trend="+24%" icon={<DollarSign size={24} />} color="bg-purple-600" />
+          <StatCard label="Active Companies" value="124" trend="+8" icon={<Briefcase size={24} />} color="bg-blue-600" />
+          <StatCard label="Total Users" value="12,504" trend="+1.2k" icon={<Users size={24} />} color="bg-emerald-600" />
+          <StatCard label="Active Trips" value="482" trend="+12" icon={<Bus size={24} />} color="bg-amber-600" />
         </div>
 
+        {/* Detailed Stats Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm">
+             <div className="flex items-center justify-between mb-6">
+                <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Commission</div>
+                <TrendingUp className="text-purple-600" size={20} />
+             </div>
+             <div className="text-3xl font-black text-slate-900">NPR 142.5K</div>
+             <div className="mt-4 h-2 bg-slate-50 rounded-full overflow-hidden">
+                <div className="h-full bg-purple-600 w-[65%]" />
+             </div>
+             <div className="mt-4 flex justify-between text-xs font-bold">
+                <span className="text-slate-400 text-[10px]">TARGET: 200K</span>
+                <span className="text-purple-600">65% ACHIVED</span>
+             </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm">
+             <div className="flex items-center justify-between mb-6">
+                <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Booking Success</div>
+                <Ticket className="text-emerald-600" size={20} />
+             </div>
+             <div className="text-3xl font-black text-slate-900">98.2%</div>
+             <div className="mt-4 h-2 bg-slate-50 rounded-full overflow-hidden">
+                <div className="h-full bg-emerald-500 w-[98%]" />
+             </div>
+             <div className="mt-4 flex justify-between text-xs font-bold">
+                <span className="text-slate-400 text-[10px]">PREV: 96.4%</span>
+                <span className="text-emerald-600">+1.8% IMPROVED</span>
+             </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm">
+             <div className="flex items-center justify-between mb-6">
+                <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Support Tickets</div>
+                <LifeBuoy className="text-amber-600" size={20} />
+             </div>
+             <div className="text-3xl font-black text-slate-900">12 OPEN</div>
+             <div className="mt-4 h-2 bg-slate-50 rounded-full overflow-hidden">
+                <div className="h-full bg-amber-500 w-[40%]" />
+             </div>
+             <div className="mt-4 flex justify-between text-xs font-bold">
+                <span className="text-slate-400 text-[10px]">TOTAL: 45</span>
+                <span className="text-amber-600">8 URGENT</span>
+             </div>
+          </div>
+        </div>
+
+        {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Pending Company Approvals */}
-          <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
-            <div className="p-8 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="text-lg font-bold text-slate-900">Pending Approvals</h3>
-              <button className="text-sm font-bold text-purple-600 hover:underline">View All</button>
+          <div className="lg:col-span-2 bg-white p-10 rounded-[48px] border border-slate-100 shadow-sm">
+            <div className="flex items-center justify-between mb-10">
+              <div>
+                 <h3 className="text-xl font-black text-slate-900">Revenue Performance</h3>
+                 <p className="text-slate-400 text-sm font-bold mt-1 uppercase tracking-widest">Global Earnings</p>
+              </div>
+              <div className="flex items-center space-x-4">
+                 <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-purple-600" />
+                    <span className="text-xs font-bold text-slate-500">REVENUE</span>
+                 </div>
+                 <select className="bg-slate-50 border-none outline-none text-xs font-bold text-slate-500 rounded-xl px-4 py-2">
+                   <option>Weekly View</option>
+                   <option>Monthly View</option>
+                 </select>
+              </div>
             </div>
-            <div className="divide-y divide-slate-50">
-              {[
-                { name: 'Everest Travels', email: 'contact@everest.com', date: '2 hours ago' },
-                { name: 'Annapurna Express', email: 'admin@annapurna.np', date: '5 hours ago' },
-                { name: 'Lumbini Yatayat', email: 'info@lumbini.com', date: '1 day ago' },
-              ].map((company, i) => (
-                <div key={i} className="p-6 flex items-center justify-between hover:bg-slate-50 transition-colors">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 font-bold">
-                      {company.name[0]}
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-slate-900">{company.name}</div>
-                      <div className="text-xs text-slate-500">{company.email}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="text-xs font-bold text-slate-400 mr-4 flex items-center space-x-1">
-                      <Clock size={12} />
-                      <span>{company.date}</span>
-                    </div>
-                    <button className="px-4 py-2 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-lg hover:bg-emerald-100 transition-colors">
-                      Approve
-                    </button>
-                    <button className="px-4 py-2 bg-red-50 text-red-600 text-xs font-bold rounded-lg hover:bg-red-100 transition-colors">
-                      Reject
-                    </button>
-                  </div>
-                </div>
-              ))}
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={data}>
+                  <defs>
+                    <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#7c3aed" stopOpacity={0.1}/>
+                      <stop offset="95%" stopColor="#7c3aed" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12, fontWeight: 'bold'}} dy={15} />
+                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12, fontWeight: 'bold'}} dx={-10} />
+                  <Tooltip
+                    contentStyle={{ borderRadius: '24px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
+                  />
+                  <Area type="monotone" dataKey="revenue" stroke="#7c3aed" strokeWidth={4} fillOpacity={1} fill="url(#colorRevenue)" />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </div>
 
-          {/* System Alerts */}
-          <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-900 mb-8">System Alerts</h3>
-            <div className="space-y-6">
-              <div className="flex space-x-4 p-4 bg-amber-50 rounded-2xl border border-amber-100">
-                <AlertCircle className="text-amber-600 shrink-0" size={24} />
-                <div>
-                  <div className="text-sm font-bold text-amber-900">Settlement Overdue</div>
-                  <div className="text-xs text-amber-700 mt-1">4 companies have pending commission settlements for July 2026.</div>
-                </div>
-              </div>
-              <div className="flex space-x-4 p-4 bg-blue-50 rounded-2xl border border-blue-100">
-                <Clock className="text-blue-600 shrink-0" size={24} />
-                <div>
-                  <div className="text-sm font-bold text-blue-900">Backup Completed</div>
-                  <div className="text-xs text-blue-700 mt-1">Daily system backup was successful at 04:00 AM.</div>
-                </div>
-              </div>
-            </div>
+          <div className="bg-white p-10 rounded-[48px] border border-slate-100 shadow-sm">
+             <h3 className="text-xl font-black text-slate-900 mb-8">Recent Activity</h3>
+             <div className="space-y-8">
+                {[
+                   { label: 'New Company', desc: 'Everest Travels registered', time: '2m ago', icon: <Briefcase size={16} />, color: 'bg-blue-50 text-blue-600' },
+                   { label: 'High Revenue', desc: 'Kathmandu-Pokhara route spike', time: '15m ago', icon: <TrendingUp size={16} />, color: 'bg-purple-50 text-purple-600' },
+                   { label: 'System Alert', desc: 'Backup completed successfully', time: '1h ago', icon: <ShieldCheck size={16} />, color: 'bg-emerald-50 text-emerald-600' },
+                   { label: 'Support', desc: 'Urgent ticket #7281 opened', time: '3h ago', icon: <LifeBuoy size={16} />, color: 'bg-amber-50 text-amber-600' },
+                ].map((item, i) => (
+                   <div key={i} className="flex items-start space-x-4">
+                      <div className={`p-3 rounded-2xl ${item.color} shrink-0`}>
+                         {item.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                         <div className="flex items-center justify-between">
+                            <h4 className="text-sm font-black text-slate-900">{item.label}</h4>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{item.time}</span>
+                         </div>
+                         <p className="text-xs text-slate-500 mt-1 font-medium truncate">{item.desc}</p>
+                      </div>
+                   </div>
+                ))}
+             </div>
+             <button className="w-full mt-10 py-4 bg-slate-50 text-slate-600 font-bold rounded-2xl hover:bg-slate-100 transition-all text-sm">
+                View Full Audit Logs
+             </button>
           </div>
         </div>
       </div>
@@ -96,15 +194,15 @@ const AdminDashboard = () => {
 const GlobalStatCard = ({ label, value, trend, icon, color }: any) => (
   <motion.div
     whileHover={{ y: -5 }}
-    className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex items-center space-x-6"
+    className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm flex items-center space-x-6"
   >
-    <div className={`p-4 rounded-2xl text-white ${color} shadow-lg shadow-opacity-20`}>
+    <div className={`p-4 rounded-[24px] text-white ${color} shadow-lg shadow-opacity-20`}>
       {icon}
     </div>
     <div>
       <div className="text-sm font-bold text-slate-400 uppercase tracking-wider">{label}</div>
       <div className="flex items-center space-x-3 mt-1">
-        <div className="text-2xl font-black text-slate-900">{value}</div>
+        <div className="text-3xl font-black text-slate-900">{value}</div>
         {trend && (
           <div className="flex items-center space-x-1 text-emerald-600 text-xs font-bold">
             <ArrowUpRight size={14} />

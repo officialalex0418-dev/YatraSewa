@@ -6,6 +6,8 @@ import Search from './pages/Search';
 import CustomerDashboard from './pages/customer/Dashboard';
 import CompanyDashboard from './pages/company/Dashboard';
 import AdminDashboard from './pages/admin/Dashboard';
+import AdminCompanies from './pages/admin/Companies';
+import AdminCustomers from './pages/admin/Customers';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/companies" element={<AdminCompanies />} />
+        <Route path="/admin/customers" element={<AdminCustomers />} />
 
       </Routes>
     </div>

@@ -12,7 +12,19 @@ import {
   LogOut,
   Bell,
   Menu,
-  X
+  X,
+  UserCheck,
+  Briefcase,
+  Ticket,
+  CreditCard,
+  Percent,
+  Gift,
+  LifeBuoy,
+  FileText,
+  PieChart,
+  Megaphone,
+  Monitor,
+  UserCircle
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -57,10 +69,25 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode; role: 
   ];
 
   const adminLinks = [
-    { icon: <LayoutDashboard size={20} />, label: 'Overview', path: '/admin/dashboard' },
-    { icon: <Users size={20} />, label: 'Companies', path: '/admin/companies' },
-    { icon: <Users size={20} />, label: 'Users', path: '/admin/users' },
-    { icon: <Settings size={20} />, label: 'System Settings', path: '/admin/settings' },
+    { icon: <LayoutDashboard size={20} />, label: 'Dashboard', path: '/admin/dashboard' },
+    { icon: <Briefcase size={20} />, label: 'Companies', path: '/admin/companies' },
+    { icon: <UserCheck size={20} />, label: 'System Employees', path: '/admin/employees' },
+    { icon: <Users size={20} />, label: 'Company Staff', path: '/admin/staff' },
+    { icon: <Users size={20} />, label: 'Customers', path: '/admin/customers' },
+    { icon: <UserCircle size={20} />, label: 'Account Management', path: '/admin/accounts' },
+    { icon: <Ticket size={20} />, label: 'Bookings', path: '/admin/bookings' },
+    { icon: <Calendar size={20} />, label: 'Trips', path: '/admin/trips' },
+    { icon: <MapPin size={20} />, label: 'Routes', path: '/admin/routes' },
+    { icon: <CreditCard size={20} />, label: 'Payments', path: '/admin/payments' },
+    { icon: <Percent size={20} />, label: 'Coupons', path: '/admin/coupons' },
+    { icon: <Gift size={20} />, label: 'Yatra Points', path: '/admin/points' },
+    { icon: <LifeBuoy size={20} />, label: 'Support', path: '/admin/support' },
+    { icon: <FileText size={20} />, label: 'Reports', path: '/admin/reports' },
+    { icon: <PieChart size={20} />, label: 'Analytics', path: '/admin/analytics' },
+    { icon: <Megaphone size={20} />, label: 'Notification Center', path: '/admin/notifications' },
+    { icon: <Monitor size={20} />, label: 'CMS', path: '/admin/cms' },
+    { icon: <Settings size={20} />, label: 'Settings', path: '/admin/settings' },
+    { icon: <UserCircle size={20} />, label: 'Profile', path: '/admin/profile' },
   ];
 
   const links = role === 'SUPER_ADMIN' ? adminLinks : companyLinks;
