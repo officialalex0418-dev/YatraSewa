@@ -47,7 +47,7 @@ Started: 2026-08-01
 ## Changelog
 2026-08-02:
 - Backend build fixes (tsconfig, types, ObjectId).
-- Frontend build fixes (legacy-peer-deps, React stable v19).
+- Frontend build fixes (legacy-peer-deps, React stable v19, TypeScript unused variable cleanup).
 - Pushed code to GitHub master branch.
 
 --------------------------------
