@@ -113,17 +113,6 @@ const Register = () => {
             {errors.password && <p className="text-xs text-red-500 ml-1">{errors.password.message}</p>}
           </div>
 
-          <div className="md:col-span-2 space-y-2">
-            <label className="text-sm font-semibold text-slate-700 ml-1">Register As</label>
-            <select
-              {...register('role')}
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
-            >
-              <option value="CUSTOMER">Customer (I want to book tickets)</option>
-              <option value="COMPANY">Company (I want to manage buses)</option>
-            </select>
-          </div>
-
           <button
             disabled={isLoading}
             className="md:col-span-2 w-full py-4 bg-purple-gradient text-white font-bold rounded-2xl shadow-lg shadow-purple-200 hover:opacity-90 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
@@ -134,7 +123,7 @@ const Register = () => {
 
         <p className="mt-8 text-center text-slate-600 text-sm">
           Already have an account? {' '}
-          <Link to="/login" className="text-purple-600 font-bold hover:underline">Sign In</Link>
+          <Link to="/login" className="text-purple-600 font-bold hover:underline">Log In</Link>
         </p>
       </motion.div>
     </div>

@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom';
 import { Search, MapPin, Calendar, Bus } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+const CITIES = [
+  'Kathmandu', 'Pokhara', 'Butwal', 'Biratnagar', 'Lumbini',
+  'Chitwan', 'Dharan', 'Hetauda', 'Nepalgunj', 'Itahari',
+  'Bhairahawa', 'Janakpur', 'Dhangadhi', 'Kalaiya', 'Tulsipur'
+];
+
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen">
@@ -14,10 +20,7 @@ const Home = () => {
           <span className="text-2xl font-bold tracking-tight text-slate-900">YatraSewa</span>
         </div>
         <div className="flex items-center space-x-6">
-          <Link to="/search" className="text-sm font-medium text-slate-600 hover:text-purple-600">Search</Link>
-          <Link to="/about" className="text-sm font-medium text-slate-600 hover:text-purple-600">About</Link>
-          <Link to="/login" className="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-50 rounded-full hover:bg-slate-100 transition-colors">Sign In</Link>
-          <Link to="/register" className="px-5 py-2 text-sm font-medium text-white bg-purple-gradient rounded-full shadow-lg shadow-purple-200 hover:opacity-90 transition-opacity">Register</Link>
+          <Link to="/login" className="px-5 py-2.5 text-sm font-bold text-white bg-purple-gradient rounded-full shadow-lg shadow-purple-200 hover:opacity-90 transition-opacity">Log In</Link>
         </div>
       </nav>
 
@@ -48,13 +51,17 @@ const Home = () => {
           transition={{ delay: 0.2 }}
           className="mt-12 w-full max-w-5xl bg-white p-6 rounded-3xl shadow-2xl shadow-slate-200/50 flex flex-wrap md:flex-nowrap items-center gap-4 border border-slate-100"
         >
+          <datalist id="cities">
+            {CITIES.map(city => <option key={city} value={city} />)}
+          </datalist>
+
           <div className="flex-1 flex items-center space-x-3 px-4 py-3 bg-slate-50 rounded-2xl border border-slate-100">
             <MapPin className="text-purple-500" size={20} />
-            <input type="text" placeholder="From (e.g. Kathmandu)" className="bg-transparent border-none outline-none w-full text-sm font-medium" />
+            <input list="cities" type="text" placeholder="From (e.g. Kathmandu)" className="bg-transparent border-none outline-none w-full text-sm font-medium" />
           </div>
           <div className="flex-1 flex items-center space-x-3 px-4 py-3 bg-slate-50 rounded-2xl border border-slate-100">
             <MapPin className="text-purple-500" size={20} />
-            <input type="text" placeholder="To (e.g. Pokhara)" className="bg-transparent border-none outline-none w-full text-sm font-medium" />
+            <input list="cities" type="text" placeholder="To (e.g. Pokhara)" className="bg-transparent border-none outline-none w-full text-sm font-medium" />
           </div>
           <div className="flex-1 flex items-center space-x-3 px-4 py-3 bg-slate-50 rounded-2xl border border-slate-100">
             <Calendar className="text-purple-500" size={20} />

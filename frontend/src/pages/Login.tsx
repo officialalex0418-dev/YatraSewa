@@ -32,7 +32,16 @@ const Login = () => {
       const response = await api.post('/auth/login', data);
       dispatch(setCredentials({ user: response.data, token: response.data.token }));
       toast.success('Welcome back!');
-      navigate('/');
+
+      // Redirect based on role
+      const role = response.data.role;
+      if (role === 'SUPER_ADMIN') {
+        navigate('/admin/dashboard');
+      } else if (role === 'COMPANY') {
+        navigate('/company/dashboard');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Login failed');
     } finally {
@@ -51,7 +60,7 @@ const Login = () => {
           <div className="p-3 text-white rounded-2xl bg-purple-gradient mb-4">
             <Bus size={32} />
           </div>
-          <h2 className="text-3xl font-bold text-slate-900">Sign In</h2>
+          <h2 className="text-3xl font-bold text-slate-900">Log In</h2>
           <p className="text-slate-500 mt-2">Welcome back to YatraSewa</p>
         </div>
 
@@ -88,7 +97,7 @@ const Login = () => {
             disabled={isLoading}
             className="w-full py-4 bg-purple-gradient text-white font-bold rounded-2xl shadow-lg shadow-purple-200 hover:opacity-90 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
           >
-            {isLoading ? <Loader2 className="animate-spin" size={20} /> : <span>Sign In</span>}
+            {isLoading ? <Loader2 className="animate-spin" size={20} /> : <span>Log In</span>}
           </button>
         </form>
 
