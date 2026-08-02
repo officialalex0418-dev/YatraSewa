@@ -184,27 +184,4 @@ const AdminDashboard = () => {
   );
 };
 
-const GlobalStatCard = ({ label, value, trend, icon, color }: any) => (
-  <motion.div
-    whileHover={{ y: -5 }}
-    className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm flex items-center space-x-6"
-  >
-    <div className={`p-4 rounded-[24px] text-white ${color} shadow-lg shadow-opacity-20`}>
-      {icon}
-    </div>
-    <div>
-      <div className="text-sm font-bold text-slate-400 uppercase tracking-wider">{label}</div>
-      <div className="flex items-center space-x-3 mt-1">
-        <div className="text-3xl font-black text-slate-900">{value}</div>
-        {trend && (
-          <div className="flex items-center space-x-1 text-emerald-600 text-xs font-bold">
-            <ArrowUpRight size={14} />
-            <span>{trend}</span>
-          </div>
-        )}
-      </div>
-    </div>
-  </motion.div>
-);
-
 export default AdminDashboard;
