@@ -1,4 +1,3 @@
-import React from 'react';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { motion } from 'framer-motion';
 import {
@@ -7,13 +6,9 @@ import {
   DollarSign,
   ShieldCheck,
   ArrowUpRight,
-  Clock,
-  AlertCircle,
   Briefcase,
   Ticket,
   TrendingUp,
-  CreditCard,
-  Percent,
   LifeBuoy
 } from 'lucide-react';
 import { StatCard } from '../../components/ui/StatCard';
@@ -24,9 +19,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar
+  ResponsiveContainer
 } from 'recharts';
 
 const data = [
