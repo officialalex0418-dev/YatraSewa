@@ -30,18 +30,19 @@ Started: 2026-08-01
 - [x] Deployment Guide provided for Render and Vercel
 - [x] Mobile App (React Native + Expo) completed with Seat Selection and QR Tickets
 - [x] Super Admin Panel: Full implementation with 18+ modules, Audit Logs, and Company/Customer CRM.
+- [ ] Fleet Management Module: In Progress (Buses, Routes, Trips, Seat Designer).
 
 --------------------------------
 
 ## Current Task
-- Project Finalization.
+- Implementing Fleet Management Module for Companies.
 
 --------------------------------
 
 ## Next Tasks
-- Final E2E testing
-- Production deployment verification
-- Customer feedback integration
+- Advanced Backend Models (SeatTemplate, Maintenance)
+- Visual Drag-and-Drop Seat Designer
+- Visual Route Fare Matrix Builder
 
 --------------------------------
 
