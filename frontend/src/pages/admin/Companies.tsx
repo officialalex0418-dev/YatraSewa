@@ -1,9 +1,10 @@
+import React from 'react';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import api from '../../services/api';
 import { DataTable } from '../../components/ui/DataTable';
 import { ColumnDef } from '@tanstack/react-table';
-import { BadgeCheck, ShieldAlert, MoreHorizontal, Eye, Ban, CheckCircle, Plus, Edit2, Trash2, X } from 'lucide-react';
+import { BadgeCheck, ShieldAlert, MoreHorizontal, CheckCircle, Plus, Edit2, Trash2, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
