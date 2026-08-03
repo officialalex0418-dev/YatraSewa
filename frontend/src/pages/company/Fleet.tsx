@@ -186,6 +186,14 @@ const Fleet = () => {
                      <input {...register('busNumber', { required: true })} placeholder="e.g. BA 2 PA 1234" className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all" />
                    </div>
                    <div className="space-y-2">
+                     <label className="text-sm font-bold text-slate-700 ml-1">Registration Number</label>
+                     <input {...register('registrationNumber', { required: true })} placeholder="e.g. REG-123456" className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all" />
+                   </div>
+                   <div className="space-y-2">
+                     <label className="text-sm font-bold text-slate-700 ml-1">Total Seats</label>
+                     <input type="number" {...register('totalSeats', { required: true, valueAsNumber: true })} placeholder="e.g. 40" className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all" />
+                   </div>
+                   <div className="space-y-2">
                      <label className="text-sm font-bold text-slate-700 ml-1">Bus Type</label>
                      <select {...register('busType')} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all">
                         <option value="DELUXE">Deluxe</option>
