@@ -1,7 +1,6 @@
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { useQuery } from '@tanstack/react-query';
 import api from '../../services/api';
-import { useAppSelector } from '../../hooks/redux';
 import { TrendingUp, Users, Bus, Calendar, DollarSign, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
