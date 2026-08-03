@@ -89,7 +89,7 @@ export const createCompany = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'User with this email already exists' });
     }
 
-    const tempPassword = crypto.randomBytes(4).toString('hex'); // 8 char temp password
+    const tempPassword = 'YaSe@3#21'; // Default temporary password
 
     const company = await User.create({
       name,
