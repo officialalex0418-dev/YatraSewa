@@ -12,8 +12,6 @@ import {
   ArrowRight,
   Clock,
   Navigation,
-  Map as MapIcon,
-  Phone,
   Info
 } from 'lucide-react';
 import toast from 'react-hot-toast';

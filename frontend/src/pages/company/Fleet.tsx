@@ -45,7 +45,6 @@ const AMENITIES = [
 
 const Fleet = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [editingBus, setEditingBus] = React.useState<Bus | null>(null);
 
   const { data: buses, isLoading, refetch } = useQuery<Bus[]>({
     queryKey: ['companyBuses'],
@@ -55,7 +54,7 @@ const Fleet = () => {
     },
   });
 
-  const { register, handleSubmit, reset, setValue, watch } = useForm<any>();
+  const { register, handleSubmit } = useForm<any>();
 
   const createMutation = useMutation({
     mutationFn: (data: any) => api.post('/company/buses', data),
@@ -112,14 +111,16 @@ const Fleet = () => {
       header: 'Status',
       cell: ({ row }) => {
         const status = row.original.status;
-        const colors = {
+        const colors: Record<string, string> = {
           ACTIVE: 'bg-emerald-50 text-emerald-600',
           MAINTENANCE: 'bg-amber-50 text-amber-600',
           RETIRED: 'bg-rose-50 text-rose-600',
-        }[status as keyof typeof colors] || 'bg-slate-50 text-slate-600';
+        };
+
+        const colorClass = colors[status] || 'bg-slate-50 text-slate-600';
 
         return (
-          <div className={`inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-current opacity-80 ${colors}`}>
+          <div className={`inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-current opacity-80 ${colorClass}`}>
             {status === 'ACTIVE' ? <CheckCircle2 size={12} /> : <AlertCircle size={12} />}
             <span>{status}</span>
           </div>

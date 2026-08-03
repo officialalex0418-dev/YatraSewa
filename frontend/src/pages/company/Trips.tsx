@@ -11,9 +11,7 @@ import {
   Clock,
   Bus as BusIcon,
   MapPin,
-  Trash2,
   X,
-  UserCheck,
   Zap,
   Repeat
 } from 'lucide-react';

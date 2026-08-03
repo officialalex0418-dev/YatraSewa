@@ -17,8 +17,6 @@ const data = [
 ];
 
 const CompanyDashboard = () => {
-  const { user } = useAppSelector(state => state.auth);
-
   const { data: stats } = useQuery({
     queryKey: ['companyStats'],
     queryFn: async () => {
