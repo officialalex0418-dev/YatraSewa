@@ -1,5 +1,13 @@
 import express from 'express';
-import { getGlobalStats, approveCompany, getAllCompanies, getAllCustomers } from '../controllers/adminController';
+import {
+  getGlobalStats,
+  approveCompany,
+  getAllCompanies,
+  getAllCustomers,
+  createCompany,
+  updateCompany,
+  deleteCompany
+} from '../controllers/adminController';
 import { getFinancialSummary, createSettlement } from '../controllers/financeController';
 
 const router = express.Router();
@@ -9,6 +17,9 @@ router.get('/stats', getGlobalStats);
 
 // Company Management
 router.get('/companies', getAllCompanies);
+router.post('/companies', createCompany);
+router.put('/companies/:id', updateCompany);
+router.delete('/companies/:id', deleteCompany);
 router.post('/companies/:companyId/approve', approveCompany);
 
 // Customer Management

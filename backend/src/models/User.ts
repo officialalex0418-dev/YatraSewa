@@ -10,6 +10,10 @@ export interface IUser extends Document {
   walletBalance: number;
   yatraPoints: number;
   isApproved: boolean;
+  address?: string;
+  panVat?: string;
+  ownerName?: string;
+  emergencyContact?: string;
   comparePassword(password: string): Promise<boolean>;
 }
 
@@ -27,6 +31,10 @@ const UserSchema: Schema = new Schema(
     walletBalance: { type: Number, default: 0 },
     yatraPoints: { type: Number, default: 0 },
     isApproved: { type: Boolean, default: false }, // For company/operator accounts
+    address: { type: String },
+    panVat: { type: String },
+    ownerName: { type: String },
+    emergencyContact: { type: String },
   },
   { timestamps: true }
 );
