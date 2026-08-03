@@ -79,7 +79,14 @@ export const getMyRoutes = async (req: Request, res: Response) => {
 // Trip Management
 export const addTrip = async (req: Request, res: Response) => {
   try {
-    const { busId, departureTime, arrivalTime } = req.body;
+    const { busId, routeId, departureTime, arrivalTime, baseFare } = req.body;
+
+    const bus = await Bus.findById(busId);
+    const route = await Route.findById(routeId);
+
+    if (!bus || !route) {
+      return res.status(404).json({ message: 'Bus or Route not found' });
+    }
 
     // Validation: Check if bus is already assigned to a trip at this time
     const existingTrip = await Trip.findOne({
@@ -95,7 +102,16 @@ export const addTrip = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Bus is already assigned to another trip during this time.' });
     }
 
-    const trip = await Trip.create({ ...req.body, companyId: (req as any).user._id });
+    const trip = await Trip.create({
+      ...req.body,
+      companyId: (req as any).user._id,
+      busNumber: bus.busNumber,
+      busType: bus.busType,
+      routeFrom: route.from,
+      routeTo: route.to,
+      totalSeats: bus.totalSeats,
+    });
+
     res.status(201).json(trip);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
