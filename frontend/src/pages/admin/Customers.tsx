@@ -1,4 +1,3 @@
-import React from 'react';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import { useQuery } from '@tanstack/react-query';
 import api from '../../services/api';
