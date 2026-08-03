@@ -3,11 +3,19 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
 export const sendWelcomeEmail = async (email: string, name: string, tempPassword: string) => {
   try {
     const loginLink = process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/login` : 'http://localhost:3000/login';
+
+    if (!RESEND_API_KEY) {
+      console.warn('RESEND_API_KEY is not defined. Email will not be sent.');
+      console.log(`[SIMULATED EMAIL] To: ${email}, Name: ${name}, TempPassword: ${tempPassword}`);
+      return;
+    }
+
+    const resend = new Resend(RESEND_API_KEY);
 
     await resend.emails.send({
       from: 'YatraSewa <onboarding@resend.dev>', // Change to your domain in production
