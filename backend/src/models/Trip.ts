@@ -4,6 +4,10 @@ export interface ITrip extends Document {
   companyId: mongoose.Types.ObjectId;
   busId: mongoose.Types.ObjectId;
   routeId: mongoose.Types.ObjectId;
+  busNumber: string;
+  busType: 'AC' | 'NON_AC' | 'DELUXE' | 'SUPER_DELUXE';
+  routeFrom: string;
+  routeTo: string;
   staff: {
     driverId?: mongoose.Types.ObjectId;
     conductorId?: mongoose.Types.ObjectId;
@@ -12,6 +16,8 @@ export interface ITrip extends Document {
   departureTime: Date;
   arrivalTime: Date;
   baseFare: number;
+  totalSeats: number;
+  bookedSeats: string[];
   intermediateFares: {
     from: string;
     to: string;
@@ -32,6 +38,10 @@ const TripSchema: Schema = new Schema(
     companyId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     busId: { type: Schema.Types.ObjectId, ref: 'Bus', required: true },
     routeId: { type: Schema.Types.ObjectId, ref: 'Route', required: true },
+    busNumber: { type: String, required: true },
+    busType: { type: String, enum: ['AC', 'NON_AC', 'DELUXE', 'SUPER_DELUXE'], required: true },
+    routeFrom: { type: String, required: true },
+    routeTo: { type: String, required: true },
     staff: {
       driverId: { type: Schema.Types.ObjectId, ref: 'User' },
       conductorId: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -40,6 +50,8 @@ const TripSchema: Schema = new Schema(
     departureTime: { type: Date, required: true },
     arrivalTime: { type: Date, required: true },
     baseFare: { type: Number, required: true },
+    totalSeats: { type: Number, required: true },
+    bookedSeats: { type: [String], default: [] },
     intermediateFares: [
       {
         from: { type: String },

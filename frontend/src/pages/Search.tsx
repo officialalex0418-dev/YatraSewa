@@ -110,7 +110,7 @@ const Search = () => {
 
                   <div className="flex items-center space-x-6">
                     <div className="text-right">
-                      <div className="text-2xl font-black text-purple-600">NPR {trip.fare}</div>
+                      <div className="text-2xl font-black text-purple-600">NPR {trip.baseFare}</div>
                       <div className="text-xs text-green-600 font-bold mt-1">{trip.totalSeats - trip.bookedSeats.length} Seats Left</div>
                     </div>
                     <button className="px-6 py-3 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-colors">

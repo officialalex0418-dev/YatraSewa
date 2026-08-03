@@ -8,7 +8,7 @@ export interface IBus extends Document {
   chassisNumber?: string;
   engineNumber?: string;
   manufacturer?: string;
-  model?: string;
+  vehicleModel?: string;
   year?: number;
   color?: string;
   busType: 'AC' | 'NON_AC' | 'DELUXE' | 'SUPER_DELUXE';
@@ -36,7 +36,7 @@ const BusSchema: Schema = new Schema(
     chassisNumber: { type: String },
     engineNumber: { type: String },
     manufacturer: { type: String },
-    model: { type: String },
+    vehicleModel: { type: String },
     year: { type: Number },
     color: { type: String },
     busType: { type: String, enum: ['AC', 'NON_AC', 'DELUXE', 'SUPER_DELUXE'], required: true },

@@ -17,7 +17,7 @@ export const createBooking = async (req: Request, res: Response) => {
       return res.status(400).json({ message: `Seats ${unavailableSeats.join(', ')} are already booked` });
     }
 
-    const totalAmount = trip.fare * seats.length;
+    const totalAmount = trip.baseFare * seats.length;
     let redemptionDiscount = 0;
 
     if (pointsToRedeem > 0) {
