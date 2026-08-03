@@ -24,7 +24,8 @@ import {
   PieChart,
   Megaphone,
   Monitor,
-  UserCircle
+  UserCircle,
+  Layout
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -63,6 +64,7 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode; role: 
   const companyLinks = [
     { icon: <LayoutDashboard size={20} />, label: 'Overview', path: '/company/dashboard' },
     { icon: <Bus size={20} />, label: 'Fleet Management', path: '/company/fleet' },
+    { icon: <Layout size={20} />, label: 'Seat Templates', path: '/company/templates' },
     { icon: <MapPin size={20} />, label: 'Routes', path: '/company/routes' },
     { icon: <Calendar size={20} />, label: 'Trips', path: '/company/trips' },
     { icon: <Users size={20} />, label: 'Staff', path: '/company/staff' },

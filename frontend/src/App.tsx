@@ -5,6 +5,10 @@ import Register from './pages/Register';
 import Search from './pages/Search';
 import CustomerDashboard from './pages/customer/Dashboard';
 import CompanyDashboard from './pages/company/Dashboard';
+import CompanyFleet from './pages/company/Fleet';
+import CompanyTemplates from './pages/company/SeatTemplates';
+import CompanyRoutes from './pages/company/Routes';
+import CompanyTrips from './pages/company/Trips';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminCompanies from './pages/admin/Companies';
 import AdminCustomers from './pages/admin/Customers';
@@ -26,6 +30,10 @@ function App() {
 
         {/* Company Routes */}
         <Route path="/company/dashboard" element={<CompanyDashboard />} />
+        <Route path="/company/fleet" element={<CompanyFleet />} />
+        <Route path="/company/templates" element={<CompanyTemplates />} />
+        <Route path="/company/routes" element={<CompanyRoutes />} />
+        <Route path="/company/trips" element={<CompanyTrips />} />
 
         {/* Admin Routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />

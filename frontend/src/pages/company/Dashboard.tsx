@@ -20,12 +20,11 @@ const CompanyDashboard = () => {
   const { user } = useAppSelector(state => state.auth);
 
   const { data: stats } = useQuery({
-    queryKey: ['companyStats', user?._id],
+    queryKey: ['companyStats'],
     queryFn: async () => {
-      const response = await api.get(`/company/stats/${user?._id}`);
+      const response = await api.get('/company/stats');
       return response.data;
     },
-    enabled: !!user?._id,
   });
 
   return (
